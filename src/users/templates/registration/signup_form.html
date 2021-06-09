@@ -1,12 +1,23 @@
 {% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
 {% block content %}
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1 class="mt-2">Sign Up as Student</h1>
+            <hr class="mt-0 mb-4">
+                <div class="content-section">
+                    <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                    </div>
+                </div>
         </div>
+    </div>
     </form>
 </div>
 {% endblock content %}
