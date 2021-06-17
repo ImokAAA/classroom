@@ -12,6 +12,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(('first name'), max_length=30, blank=True)
     last_name = models.CharField(('last name'), max_length=30, blank=True)
     date_joined = models.DateTimeField(('date joined'), auto_now_add=True)
+    is_staff = models.BooleanField(
+        ('staff status'),
+        default=False,
+        help_text=('Designates whether the user can log into this admin site.'),
+    )
     is_active = models.BooleanField(('active'), default=True)
     is_student = BooleanField(default=False)
     is_teacher = BooleanField(default=False)
@@ -40,4 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Student(models.Model):
+    user = models.OneToOneField(User, on_delete= models.CASCADE, primary_key= True)
+
+
+class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE, primary_key= True)
