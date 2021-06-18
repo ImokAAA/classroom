@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'crispy_forms',
     'django_rename_app',
+    'classroom',
 ]
 
 MIDDLEWARE = [
