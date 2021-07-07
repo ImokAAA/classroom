@@ -23,6 +23,7 @@ class StudentModelTest(TestCase):
         self.assertTrue(user.is_student)
         self.assertEqual(user, student.user)
 
+
 class TeacherModelTest(TestCase):
 
     def setUp(self):
