@@ -1,8 +1,12 @@
-from django.urls import include, path
-from django.views.generic import TemplateView
+from classroom.views import AuditoryCreateView, AuditoryDetailView, AuditoryListView, TaskDetailView, TaskListView
+from django.urls import path
 
-from classroom.views import home
-
+app_name = 'classroom'
 urlpatterns = [
     #path('home/', TemplateView.as_view(template_name = "classroom/templates/home.html"), name = 'home'),
+    path('list/', AuditoryListView.as_view(), name = 'list'),
+    path('<int:pk>', AuditoryDetailView.as_view(), name = 'detail'),
+    path('create', AuditoryCreateView.as_view(), name = 'create'),
+    path('task/list/', TaskListView.as_view(), name = 'task-list'),
+    path('task/<int:pk>', TaskDetailView.as_view(), name = 'task-detail'),
 ]

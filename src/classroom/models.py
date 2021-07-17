@@ -1,13 +1,12 @@
 from django.db import models
 from django.db.models.fields import CharField, DateTimeField, IntegerField, TextField
-from django.db.models.fields.related import ForeignKey, ManyToManyField, OneToOneField
-from django.db.models.manager import ManagerDescriptor
+from django.db.models.fields.related import ManyToManyField, OneToOneField
 from users.models import Student, Teacher
 
 
 class Auditory(models.Model):
     ''' 
-    Defines groups of students that techer organizes.
+    Defines groups of students that teacher organizes.
     '''
     name = CharField(max_length=150)
     description = TextField(blank = True, null=True)

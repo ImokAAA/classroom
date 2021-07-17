@@ -1,0 +1,6 @@
+Who are you?
+<div class="btn-group">
+    <button type="button" class="btn btn-primary"><a href = '{% url 'users:student_signup' %}'>Student</a></button>
+    <button type="button" class="btn btn-primary"><a href = '{% url 'users:teacher_signup' %}'>Teacher</a></button>
+  </div>
+Already have an account? Then <a href = '{% url 'users:login' %}'>login</a>

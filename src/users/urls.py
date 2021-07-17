@@ -2,6 +2,7 @@ from django.urls import include, path
 
 from users.views import students,teachers
 
+app_name = 'users'
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     #path('signup/', classroom.SignUpView.as_view(), name='signup'),
