@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      
-</head>
-<body>
+{% extends '../base.html' %}
+{% block content %}
     <div class="container">
         <h2>CLASSROOM</h2>
-    </div>
-    <a href="{% url 'classroom:create' %}">Create Auditory</a>
+        <h3>{{ user.email }}</h3>
+        <a href="{% url 'classroom:create' %}">Create Auditory</a> <br>
+        <a href="{% url 'users:logout' %}">logout</a> <br>
+        
+      </div>
+    
     <div class="album py-5 bg-light">
     <div class="container">
       <div class="row">
         {% for auditory in auditories %}
-        <a href = "#">
+        <a href = "{% url 'classroom:detail' auditory.id %}">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{auditory.name}}</text></svg>
@@ -43,6 +35,4 @@
       </div>
     </div>
   </div>
-
-</body>
-</html>
+  {% endblock content %}

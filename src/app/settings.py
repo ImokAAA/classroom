@@ -133,6 +133,10 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/classroom/list/'
 
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
 )
+
+LOGIN_URL = '/accounts/login/'

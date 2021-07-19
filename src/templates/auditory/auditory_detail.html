@@ -1,0 +1,17 @@
+{% extends '../base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>{{ auditory.name }}</h2>
+        <a href="{%url 'classroom:delete' auditory.id %}"><h3>Delete</h3></a>
+        <a href="{% url 'classroom:list' %}">Back</a>
+      </div>
+    
+    <div class="album py-5 bg-light">
+    <div class="container">
+        {{auditory.description}}
+        Teacher: {{auditory.teacher.email}}
+        Student: {{ auditory.student.email }}
+    </div>
+  </div>
+{% endblock content %}
