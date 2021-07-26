@@ -1,6 +1,6 @@
-{% extends '../base.html' %}
+{% extends './auditory_base.html' %}
 
-{% block content %}
+{% block body %}
     <div class="container">
         <h2>{{ auditory.name }}</h2>
         <a href="{%url 'classroom:delete' auditory.id %}"><h3>Delete</h3></a>
@@ -14,4 +14,4 @@
         Student: {{ auditory.student.email }}
     </div>
   </div>
-{% endblock content %}
+{% endblock body %}

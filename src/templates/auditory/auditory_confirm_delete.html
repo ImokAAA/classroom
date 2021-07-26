@@ -1,22 +1,22 @@
-{% extends "../base.html" %}
+{% extends './auditory_base.html' %}
 
-
-{% block content %}
+{% block body %}
 <div class="container">
     <div class="row justify-content-center">
       <div class="col-8">
-        <h1 class="mt-2">Delete auditory</h1>
+        <h1 class="mt-2">Are you sure you want delete auditory?</h1>
             <hr class="mt-0 mb-4">
                 <div class="content-section">
                     <form method="POST">
                     {% csrf_token %}
                 
                     <div class="form-group">
-                        <button class="btn btn-outline-info" type="submit">Delete</button>
+                        <button class="btn btn-outline-info" type="submit">Yes, delete</button>
+                        <a href="{% url 'classroom:list' %}">No</a>
                     </div>
                 </div>
         </div>
     </div>
     </form>
 </div>
-{% endblock content %}
+{% endblock body %}
