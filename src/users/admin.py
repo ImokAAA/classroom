@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from users.models import User as MyUser
+from users.models import Student, Teacher, User as MyUser
 
 
 class UserCreationForm(forms.ModelForm):
@@ -81,3 +81,5 @@ admin.site.register(MyUser, UserAdmin)
 # unregister the Group model from admin.
 admin.site.unregister(Group)
 #admin.site.register(User, BaseUserAdmin)
+admin.site.register(Teacher)
+admin.site.register(Student)

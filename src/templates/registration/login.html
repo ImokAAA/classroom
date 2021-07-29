@@ -1,5 +1,5 @@
 {% extends "../base.html" %}
-
+{% load static %}
 {% block head %}
 <style>
     body {
@@ -55,11 +55,20 @@
 <div class="container">
 <form class="form-signin text-center" method="POST">
     {% csrf_token %}
-    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="mb-4" src="{% static 'main/images/classroom.png' %}" alt="bla">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    {{ form.as_p }}
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.username.errors }}
+        <label for="{{ form.username.id_for_label }}">Email:</label>
+        {{ form.username }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.password.errors }}
+        <label for="{{ form.password.id_for_label }}">Password:</label>
+        {{ form.password }}
+    </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
   </form>
   </div>
 {% endblock content %}
