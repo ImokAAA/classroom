@@ -14,11 +14,13 @@
     <nav class="navbar navbar-expand-sm fixed-top bg-white">
       <a class="navbar-brand" href="#"><img class="first-slide" src="{% static 'main/images/classroom.png' %}" alt="classroomimage"></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="btn-group mt-3 mt-md-1 mr-5">
+        {% if user.is_teacher %}
+        <a href="{% url 'classroom:create' %}">Create Auditory</a>
+        {% endif %}
+        <div class="ml-5 mr-0">{{ user.email }}</div>
+        <div class="btn-group mt-md-1 mr-0 ml-3">
           <a class="btn btn-primary" href = '{% url 'users:logout' %}'>Log Out</a>
         </div>
-        {{ user.email }}
-        <a href="{% url 'classroom:create' %}">Create Auditory</a>
       </div>
     </nav>
   </div>
@@ -27,10 +29,22 @@
     <div class="container">
       <div class="row">
         {% for auditory in auditories %}
-        <a href = "{% url 'classroom:detail' auditory.id %}">
         <div class="col-md-4 ">
           <div class="card mb-4 shadow-sm ">
-            <svg class="bd-placeholder-img card-img-top bg-greyyellow" width="1000" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#bcd45f"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{auditory.name}}</text></svg>
+            <a href = "{% url 'classroom:detail' auditory.id %}">
+            <svg class="bd-placeholder-img card-img-top bg-greyyellow" width="1000" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+              <title>Classroom</title><rect width="100%" height="100%" fill="#bcd45f"/>
+              <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{auditory.name}}</text>
+            </svg>
+            </a>
+            <div class="dropdown">
+              <button type="button" data-toggle="dropdown">
+                <i class="material-icons">more_horiz</i>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{%url 'classroom:delete' auditory.id %}">Delete</a>
+              </div>
+            </div>
             <div class="card-body">
               <p class="card-text">{{auditory.description}}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -43,7 +57,6 @@
             </div>
           </div>
         </div>
-        </a>
         {% endfor %}
 
 

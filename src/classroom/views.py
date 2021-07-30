@@ -54,7 +54,6 @@ class AuditoryAddStudentView(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse('classroom:detail', args=(auditory.id,))) 
 
         raise HttpResponseBadRequest('form is not valid')
-    
 
 
 class AuditoryDeleteView(LoginRequiredMixin, DeleteView):
@@ -64,22 +63,29 @@ class AuditoryDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'auditory/auditory_confirm_delete.html'
 
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
-    pass
+    template_name = 'task/task_list.html'
+    context_object_name = 'tasks'
+
+    def get_queryset(self, **kwargs):
+        auditory = get_object_or_404(Auditory, pk = kwargs['pk'])
+        return Task.objects.filter(auditory = auditory).order_by('-date_start')
 
 
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
-    pass
+    slug_field = 'id'
+    template_name = 'task/task_detail.html'
+    context_object_name = 'task'
 
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
-    pass
+    template_name = 'task/task_create.html'
+    fields = ['name', 'description', 'max_grade', 'date_finish']
 
-
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     pass
 
