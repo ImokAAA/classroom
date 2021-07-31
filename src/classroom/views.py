@@ -67,11 +67,16 @@ class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'task/task_list.html'
     context_object_name = 'tasks'
-
-    def get_queryset(self, **kwargs):
-        auditory = get_object_or_404(Auditory, pk = kwargs['pk'])
-        return Task.objects.filter(auditory = auditory).order_by('-date_start')
-
+    
+    def get(self, request, *args, **kwargs):
+        self.auditory = get_object_or_404(Auditory, pk = kwargs['pk'])
+        self.object_list = Task.objects.filter(auditory = self.auditory).order_by('-date_start')
+        return super().get(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data.update({'auditory': self.auditory})
+        return data
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task

@@ -13,10 +13,10 @@
       <div class="collapse navbar-collapse" id="navbarsExample09">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Auditory</a>    
+            <a class="nav-link active" aria-current="page" href="{% url 'classroom:detail' auditory.id %}">Auditory</a>    
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Tasks</a>
+            <a class="nav-link" href="{% url 'classroom:task-list' auditory.id %}">Tasks</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Participants</a>

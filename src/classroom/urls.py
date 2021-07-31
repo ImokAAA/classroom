@@ -1,4 +1,4 @@
-from classroom.views import AuditoryAddStudentView, AuditoryCreateView, AuditoryDetailView, AuditoryListView, TaskDetailView, TaskListView, AuditoryDeleteView
+from classroom.views import AuditoryAddStudentView, AuditoryCreateView, AuditoryDetailView, AuditoryListView, TaskCreateView, TaskDetailView, TaskListView, AuditoryDeleteView
 from django.urls import path
 
 app_name = 'classroom'
@@ -11,6 +11,6 @@ urlpatterns = [
     path('<int:pk>/add_student', AuditoryAddStudentView.as_view(), name = 'add_student'),
     path('task/list/<int:pk>', TaskListView.as_view(), name = 'task-list'),
     path('task/<int:pk>', TaskDetailView.as_view(), name = 'task-detail'),
-    path('task/create/<int:pk>', TaskListView.as_view(), name = 'task-list'),
+    path('task/create/<int:pk>', TaskCreateView.as_view(), name = 'task-create'),
 
 ]
