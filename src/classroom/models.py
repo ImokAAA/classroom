@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.fields import CharField, DateTimeField, IntegerField, TextField
-from django.db.models.fields.related import ManyToManyField, OneToOneField
+from django.db.models.fields.related import ForeignKey, ManyToManyField, OneToOneField
 from users.models import Student, Teacher, User
 
 
@@ -40,7 +40,7 @@ class Task(models.Model):
     name = CharField(max_length=150)
     description = TextField(blank = True, null=True)
     auditory = ManyToManyField(Auditory)
-    teacher = OneToOneField(Teacher, on_delete = models.CASCADE)
+    teacher = ForeignKey(Teacher, on_delete = models.CASCADE)
     max_grade = IntegerField()
     date_start = DateTimeField(auto_now_add=True)
     date_finish = DateTimeField()

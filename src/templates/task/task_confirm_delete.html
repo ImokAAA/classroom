@@ -4,19 +4,19 @@
 <div class="container">
     <div class="row justify-content-center">
       <div class="col-8">
-        <h1 class="mt-2">Create task</h1>
+        <h1 class="mt-2">Are you sure you want delete task?</h1>
             <hr class="mt-0 mb-4">
                 <div class="content-section">
                     <form method="POST">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                
                     <div class="form-group">
-                        <button class="btn btn-outline-info" type="submit">Create</button>
+                        <button class="btn btn-outline-info" type="submit">Yes, delete</button>
+                        <a href="{% url 'classroom:task-list' auditory.id %}">No</a>
                     </div>
                 </div>
         </div>
     </div>
     </form>
 </div>
-
 {% endblock body %}

@@ -1,5 +1,6 @@
+from users.models import Teacher
 from django.views.generic.base import View
-from classroom.forms import AuditoryAddStudentForm
+from classroom.forms import AuditoryAddStudentForm, TaskCreateForm
 from django.http.response import HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import ListView
@@ -83,15 +84,46 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     slug_field = 'id'
     template_name = 'task/task_detail.html'
     context_object_name = 'task'
+    pk_url_kwarg = 'pk'
 
+    def get_context_data(self, **kwargs):
+        self.auditory = get_object_or_404(Auditory, pk = self.kwargs['auditory_pk'])
+        data = super().get_context_data(**kwargs)
+        data.update({'auditory': self.auditory})
+        return data
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     template_name = 'task/task_create.html'
-    fields = ['name', 'description', 'max_grade', 'date_finish']
+    form_class = TaskCreateForm
+    
+    def get_context_data(self, **kwargs):
+        self.auditory = get_object_or_404(Auditory, pk = self.kwargs['pk'])
+        data = super().get_context_data(**kwargs)
+        data.update({'auditory': self.auditory})
+        return data
+    
+    def form_valid(self, form):
+        teacher = get_object_or_404(Teacher, user = self.request.user)
+        form.instance.teacher = teacher
+        self.object = form.save()
+        self.auditory = get_object_or_404(Auditory, pk = self.kwargs['pk'])
+        return HttpResponseRedirect(reverse('classroom:task-list', args=(self.auditory.id,)))
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    pass
-
-
+    success_url = '/classroom/list/'
+    slug_field = 'id'
+    template_name = 'task/task_confirm_delete.html'
+    pk_url_kwarg = 'pk'
+    
+    def get_context_data(self, **kwargs):
+        self.auditory = get_object_or_404(Auditory, pk = self.kwargs['auditory_pk'])
+        data = super().get_context_data(**kwargs)
+        data.update({'auditory': self.auditory})
+        return data
+    
+    def get_success_url(self):
+        self.auditory = get_object_or_404(Auditory, pk = self.kwargs['auditory_pk'])
+        self.success_url = reverse('classroom:task-list', args=(self.auditory.id,))
+        return self.success_url.format(**self.object.__dict__)
