@@ -23,4 +23,5 @@ urlpatterns = [
     path('classroom/', include('classroom.urls')),
     path('home/', TemplateView.as_view(template_name = "home.html"), name = 'home'),
     path('', TemplateView.as_view(template_name = "main.html"), name = 'main'),
+    path('answer/', include('answer.urls')),
 ]

@@ -53,6 +53,6 @@ class Assignment(models.Model):
     task = OneToOneField(Task, on_delete=models.CASCADE)
     teacher = OneToOneField(Teacher, on_delete=models.CASCADE)
     student = OneToOneField(Student, on_delete=models.CASCADE)
-    grade = IntegerField()
+    grade = IntegerField(blank = True, null=True)
     date_assigned = DateTimeField(auto_now_add=True)
     

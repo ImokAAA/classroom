@@ -3,16 +3,14 @@
 {% block body %}
 
 <div class=" container jumbotron text-center">
-    <h1>{{task.name}}</h1>
-    <p>{{task.description}}</p>
+    <h1>Student name:</h1>
+    <p>{{answer.description}}<p>
 </div>
 
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
-      <h2><a href="{% url 'classroom:task-delete' auditory.id task.id %}">Delete task</a></h2>
-      <h2><a href="{% url 'answer:create' task.id auditory.id %}">Submit answer</a></h2>
-      <h2><a href="{% url 'answer:list-task' task.id auditory.id %}">Answer list</a></h2>
+      <h2><a href="{% url 'answer:assign' answer.id auditory.id %}">Assign</a></h2>
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
       <div class="fakeimg">Fake Image</div>

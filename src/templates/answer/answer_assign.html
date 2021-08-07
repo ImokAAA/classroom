@@ -1,0 +1,22 @@
+{% extends '../auditory/auditory_base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1 class="mt-2">Assign Student</h1>
+            <hr class="mt-0 mb-4">
+            <p> Maximum: {{ max_grade }}</p>
+                <div class="content-section">
+                    <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="Assign">Create</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock body %}
