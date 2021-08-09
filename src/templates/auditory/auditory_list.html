@@ -3,8 +3,8 @@
 
 {% block head %}
 <style>
-  .bg-greyyellow {
-  background-color:#bcd45f;
+  .bg-yellow {
+  background-color:#f4f022;
 }
 </style>
 {% endblock head %}
@@ -32,11 +32,12 @@
         <div class="col-md-4 ">
           <div class="card mb-4 shadow-sm ">
             <a href = "{% url 'classroom:detail' auditory.id %}">
-            <svg class="bd-placeholder-img card-img-top bg-greyyellow" width="1000" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-              <title>Classroom</title><rect width="100%" height="100%" fill="#bcd45f"/>
+            <svg class="bd-placeholder-img card-img-top bg-yellow" width="1000" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+              <title>Classroom</title><rect width="100%" height="100%" fill="#f4f022"/>
               <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{auditory.name}}</text>
             </svg>
             </a>
+            {% if user.is_teacher %}
             <div class="dropdown">
               <button type="button" data-toggle="dropdown">
                 <i class="material-icons">more_horiz</i>
@@ -45,14 +46,17 @@
                 <a class="dropdown-item" href="{%url 'classroom:delete' auditory.id %}">Delete</a>
               </div>
             </div>
+            {% endif %}
             <div class="card-body">
               <p class="card-text">{{auditory.description}}</p>
               <div class="d-flex justify-content-between align-items-center">
+                {% comment %}
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">{{auditory.teacher.name}}</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary">{{auditory.student.name}}</button>
                 </div>
                 <small class="text-muted">9 mins</small>
+                {% endcomment %}
               </div>
             </div>
           </div>

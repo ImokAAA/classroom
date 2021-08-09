@@ -10,9 +10,14 @@
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
+      {% if user.is_teacher %}
       <h2><a href="{% url 'classroom:task-delete' auditory.id task.id %}">Delete task</a></h2>
-      <h2><a href="{% url 'answer:create' task.id auditory.id %}">Submit answer</a></h2>
       <h2><a href="{% url 'answer:list-task' task.id auditory.id %}">Answer list</a></h2>
+      {% elif user.is_student %}
+      
+      <h2><a href="{% url 'answer:create' task.id auditory.id %}">Submit answer</a></h2>
+      
+      {% endif %}
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
       <div class="fakeimg">Fake Image</div>

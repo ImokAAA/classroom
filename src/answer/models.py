@@ -18,16 +18,25 @@ class Answer(models.Model):
     date_assigned = DateTimeField(blank = True, null=True)
 
     def is_assigned(self):
+        '''
+        does answer assigned?
+        '''
         if self.date_assigned:
             return True
         return False
 
     def answer_assign(self, grade):
+        '''
+        assigns student answer
+        '''
         self.grade = grade
         self.date_assigned = datetime.now()
         self.save()
 
     def is_match_max_grade(self, grade):
+        '''
+        checks if grade is less than maximum possible grade
+        '''
         if grade <= self.task.max_grade:
             return True
         return False    
